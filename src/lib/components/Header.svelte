@@ -36,7 +36,7 @@
             <ThemeSelector />
 
             {#if $page.data.user}
-				<form method="post" class="ml-auto" action="/login?/signout" use:enhance>
+				<form method="post" action="/login?/signout" use:enhance>
 					<button type="submit" class="btn">
 						<div class="flex items-center text-red-500">
 							<LogOut class="mr-2 h-4 w-4" />
@@ -45,7 +45,7 @@
 					</button>
 				</form>
 			{:else}
-				<a href="/login" class="btn ml-auto"> <School />Login</a>
+				<a href="/login" class="btn"> <School />Login</a>
 			{/if}
 		</div>
 
@@ -53,7 +53,7 @@
             <ThemeSelector />
 
 			{#if $page.data.user}
-				<form method="post" class="hidden sm:block ml-auto" action="/login?/signout" use:enhance>
+				<form method="post" class="hidden sm:block" action="/login?/signout" use:enhance>
 					<button type="submit" class="btn mr-2">
 						<div class="flex items-center text-red-500">
 							<LogOut class="mr-2 h-4 w-4" />
@@ -62,7 +62,7 @@
 					</button>
 				</form>
 			{:else}
-				<a href="/login" class="hidden sm:flex btn ml-auto mr-2"> <School />Login</a>
+				<a href="/login" class="hidden sm:flex btn mr-2"> <School />Login</a>
 			{/if}
 			<!-- <a href="/" class="btn ml-auto">your call to action</a> -->
 			<div class="dropdown dropdown-end">
