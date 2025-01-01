@@ -3,14 +3,17 @@
 	import posthog from 'posthog-js';
 	import { browser, dev } from '$app/environment';
 	import { beforeNavigate, afterNavigate } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { getMeta } from '$lib/meta';
 	import {
 		PUBLIC_DEFAULT_DESCRIPTION,
 		PUBLIC_DEFAULT_TITLE,
-		PUBLIC_PROJECT_NAME
 	} from '$env/static/public';
 	import Header from '$lib/components/Header.svelte';
+
+    import { gsap } from 'gsap';
+    import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
 
 	let { children } = $props();
 
@@ -23,9 +26,9 @@
 			defaultTitle: PUBLIC_DEFAULT_TITLE,
 			defaultDescription: PUBLIC_DEFAULT_DESCRIPTION,
 			defaultOGImage: '/socialcard.jpeg',
-			routeMeta: $page.data?.meta ?? {},
-			url: $page.url,
-			pageParam: $page.params?.page ?? ''
+			routeMeta: page.data?.meta ?? {},
+			url: page.url,
+			pageParam: page.params?.page ?? ''
 		})
 	);
 </script>
@@ -36,7 +39,7 @@
 	<title>{meta.title}</title>
 	<meta name="description" content={meta.description} />
 	<link rel="canonical" href={meta.canonicalUrl} />
-
+    
 	<!--
 		  Icons
 		  - https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs

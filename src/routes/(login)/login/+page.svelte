@@ -33,14 +33,6 @@
 	};
 </script>
 
-<svelte:head>
-	<title>{{ PUBLIC_DEFAULT_TITLE }}</title>
-	<meta
-		name="description"
-		content={ PUBLIC_DEFAULT_DESCRIPTION }
-	/>
-</svelte:head>
-
 <div class="flex p-5 items-center justify-center h-screen">
 	<div class="card p-5 flex flex-col w-full max-w-[470px]">
 		{#if email_sent}

@@ -1,102 +1,124 @@
-<script lang="ts">
+<script lang='ts'>
 	import { PUBLIC_PROJECT_NAME } from '$env/static/public';
 	import type { Link } from '$lib/types';
 	import Container from './Container.svelte';
 	import { LogOut, Menu, School } from 'lucide-svelte';
 	import ThemeSelector from './ThemeSelector.svelte';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { enhance } from '$app/forms';
+    import {onMount} from 'svelte';
+
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 	const links: Array<Link> = [
+		{ name: 'Experience', href: '/ecoboat' },
 		{ name: 'About', href: '/#about' },
 		{ name: 'Pricing', href: '/#pricing' },
 		{ name: 'FAQ', href: '/#faq' }
 	];
+
+    // Show/hide navbar on scroll
+    onMount(() => {
+        const showAnim = gsap.from('.main-navbar', { 
+            yPercent: -100,
+            paused: true,
+            duration: 0.2
+        }).progress(1);
+
+        ScrollTrigger.create({
+            start: "top top",
+            end: "max",
+            onUpdate: (self) => {
+                self.direction === -1 ? showAnim.play() : showAnim.reverse()
+            }
+        });
+    });
 </script>
 
-<Container>
-	<header class="navbar px-0">
+<Container class='main-navbar sticky top-0 bg-base-100 z-50'>
+	<header class='navbar px-0'>
 
-		<div class="navbar-start">
-			<School class="w-10 h-10 mr-3" />
-			<div class="text-2xl sm:text-3xl font-bold">{PUBLIC_PROJECT_NAME}</div>
-		</div>
+		<a class='navbar-start' href='/'>
+			<School class='w-10 h-10 mr-3' />
+			<Container class='text-2xl sm:text-3xl font-bold'>{PUBLIC_PROJECT_NAME}</Container>
+        </a>
 
-		<div class="navbar-center hidden lg:flex">
-			<ul class="menu menu-horizontal px-1">
+		<Container class='navbar-center hidden lg:flex'>
+			<ul class='menu menu-horizontal px-1'>
 				{#each links as link}
 					<li>
 						<a href={link.href}>{link.name}</a>
 					</li>
 				{/each}
 			</ul>
-		</div>
+		</Container>
         
-		<div class="navbar-end hidden lg:flex">
+		<Container class='navbar-end hidden lg:flex'>
             <ThemeSelector />
 
-            {#if $page.data.user}
-				<form method="post" action="/login?/signout" use:enhance>
-					<button type="submit" class="btn">
-						<div class="flex items-center text-red-500">
-							<LogOut class="mr-2 h-4 w-4" />
+            {#if page.data.user}
+				<form method='post' action='/login?/signout' use:enhance>
+					<button type='submit' class='btn'>
+						<Container class='flex items-center text-red-500'>
+							<LogOut class='mr-2 h-4 w-4' />
 							<span>Log out</span>
-						</div>
+						</Container>
 					</button>
 				</form>
 			{:else}
-				<a href="/login" class="btn"> <School />Login</a>
+				<a href='/login' class='btn'> <School />Login</a>
 			{/if}
-		</div>
+		</Container>
 
-		<div class="navbar-end lg:hidden">
+		<Container class='navbar-end lg:hidden'>
             <ThemeSelector />
 
-			{#if $page.data.user}
-				<form method="post" class="hidden sm:block" action="/login?/signout" use:enhance>
-					<button type="submit" class="btn mr-2">
-						<div class="flex items-center text-red-500">
-							<LogOut class="mr-2 h-4 w-4" />
+			{#if page.data.user}
+				<form method='post' class='hidden sm:block' action='/login?/signout' use:enhance>
+					<button type='submit' class='btn mr-2'>
+						<Container class='flex items-center text-red-500'>
+							<LogOut class='mr-2 h-4 w-4' />
 							<span>Log out</span>
-						</div>
+						</Container>
 					</button>
 				</form>
 			{:else}
-				<a href="/login" class="hidden sm:flex btn mr-2"> <School />Login</a>
+				<a href='/login' class='hidden sm:flex btn mr-2'> <School />Login</a>
 			{/if}
-			<!-- <a href="/" class="btn ml-auto">your call to action</a> -->
-			<div class="dropdown dropdown-end">
-				<div tabindex="0" role="button" class="btn btn-ghost m-1"><Menu /></div>
+			<!-- <a href='/' class='btn ml-auto'>your call to action</a> -->
+			<Container class='dropdown dropdown-end'>
+				<Container tabindex={0} role='button' class='btn btn-ghost m-1'><Menu /></Container>
 				<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 				<ul
-					tabindex="0"
-					class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+					tabindex='0'
+					class='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52'
 				>
 					{#each links as link}
 						<li>
 							<a href={link.href}>{link.name}</a>
 						</li>
 					{/each}
-					{#if $page.data.user}
+					{#if page.data.user}
 						<form
-							method="post"
-							class="sm:hidden btn mt-5 mb-2 mx-2"
-							action="/login?/signout"
+							method='post'
+							class='sm:hidden btn mt-5 mb-2 mx-2'
+							action='/login?/signout'
 							use:enhance
 						>
-							<button type="submit">
-								<div class="flex items-center text-red-500">
-									<LogOut class="mr-2 h-4 w-4" />
+							<button type='submit'>
+								<Container class='flex items-center text-red-500'>
+									<LogOut class='mr-2 h-4 w-4' />
 									<span>Log out</span>
-								</div>
+								</Container>
 							</button>
 						</form>
 					{:else}
-						<a href="/login" class="sm:hidden btn mt-5 mb-2 mx-2"> <School />Login</a>
+						<a href='/login' class='sm:hidden btn mt-5 mb-2 mx-2'> <School />Login</a>
 					{/if}
 				</ul>
-			</div>
-		</div>
+			</Container>
+		</Container>
 
 	</header>
 </Container>

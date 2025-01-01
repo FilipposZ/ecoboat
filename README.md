@@ -1,4 +1,3 @@
-# Escape Room Madness
-The website of the Escape Room Madness entreprise.
-
-Revolutionize the immersiveness of the escape room experience.
+# Ecoboat
+The website of the Ecoboat entreprise.
+An eco-friendly and meaningful boat trip experience.
