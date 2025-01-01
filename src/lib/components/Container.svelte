@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+    import type { HTMLAttributes } from 'svelte/elements'
 
-	let { children }: { children: Snippet } = $props();
+	let { children, ...restProps }: HTMLAttributes<HTMLDivElement> = $props();
 </script>
 
-<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-	{@render children()}
+<div {...restProps} class={`mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${restProps.class}`}>
+	{@render children?.()}
 </div>

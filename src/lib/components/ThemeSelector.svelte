@@ -1,6 +1,6 @@
 <label class="swap swap-rotate">
     <!-- this hidden checkbox controls the state -->
-    <input type="checkbox" class="theme-controller" value="fantasy" />
+    <input type="checkbox" class="theme-controller" value="fantasy" name="theme-controller"/>
   
     <!-- sun icon -->
     <svg
