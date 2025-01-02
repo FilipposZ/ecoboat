@@ -47,7 +47,6 @@
 			curve.getPoint(lerp.current).z
 		);
 		camera.current.position.copy(newPosition);
-
 		// get boat position
 		// camera.current.lookAt(new Vector3(0, 7, 0));
 	});

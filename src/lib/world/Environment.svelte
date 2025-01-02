@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { TabPage, Slider, Button, Folder, Pane } from 'svelte-tweakpane-ui';
+	import { TabPage, Slider, Button, Folder } from 'svelte-tweakpane-ui';
 	import Cloud from './Cloud.svelte';
 	import { Spring } from 'svelte/motion';
 	import { Sky } from '@threlte/extras';
@@ -94,7 +94,6 @@
 <Cloud position={[3, 20, -15]} />
 
 {#snippet environmentConfigSnippet()}
-	<!-- <Pane title="Environment" position="fixed" y={70} x={10}> -->
 	<TabPage title="Environment">
 		<Slider bind:value={turbidity} label="Turbidity" min={0} max={20} />
 		<Slider bind:value={rayleigh} label="Rayleigh" min={0} max={4} />
@@ -131,4 +130,3 @@
 		</Folder>
 	</TabPage>
 {/snippet}
-<!-- </Pane> -->

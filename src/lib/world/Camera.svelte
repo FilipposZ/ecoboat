@@ -1,16 +1,7 @@
 <script lang="ts">
 	import { T, useTask, useThrelte } from '@threlte/core';
 	import { onMount } from 'svelte';
-	import {
-		Pane,
-		Slider,
-		Button,
-		Folder,
-		RotationEuler,
-		Point,
-		TabPage,
-		Checkbox
-	} from 'svelte-tweakpane-ui';
+	import { Button, RotationEuler, Point, TabPage, Checkbox } from 'svelte-tweakpane-ui';
 	import { gsap } from 'gsap';
 	import { addConfigTabPage } from '$lib/configuration/config.svelte';
 	import { type Transform } from '$lib/utils/graphics.svelte';
@@ -82,7 +73,6 @@
 	<!-- <OrbitControls enableZoom={true} /> -->
 </T.PerspectiveCamera>
 
-<!-- <Pane title="Camera" position="fixed" y={70} x={window.innerWidth - 500}> -->
 {#snippet cameraConfigPage()}
 	<TabPage title="Camera">
 		<Checkbox bind:value={shouldForceCameraState} label="Move camera with mouse" />
@@ -90,5 +80,4 @@
 		<RotationEuler bind:value={cameraState.rotation} label="Rotation" picker={'inline'} />
 		<Button on:click={resetCameraState} title="Reset" />
 	</TabPage>
-	<!-- </Pane> -->
 {/snippet}
