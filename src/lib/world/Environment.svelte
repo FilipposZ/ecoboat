@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { TabPage, Slider, Button, Folder } from 'svelte-tweakpane-ui';
+	import { Folder, Slider, Button } from 'svelte-tweakpane-ui';
 	import Cloud from './Cloud.svelte';
 	import { Spring } from 'svelte/motion';
 	import { Sky } from '@threlte/extras';
-	import { addConfigTabPage } from '$lib/configuration/config.svelte';
+	import { configPane } from '$lib/configuration/config.svelte';
+
+	configPane.addConfigTabPage(environmentConfigSnippet);
 
 	const presets = {
 		sunset: {
@@ -77,9 +79,6 @@
 			exposure: exposure
 		});
 	});
-
-	// add the config snippet to the global ConfigPane
-	addConfigTabPage(environmentConfigSnippet);
 </script>
 
 <Sky
@@ -94,7 +93,7 @@
 <Cloud position={[3, 20, -15]} />
 
 {#snippet environmentConfigSnippet()}
-	<TabPage title="Environment">
+	<Folder title="Environment" expanded={false}>
 		<Slider bind:value={turbidity} label="Turbidity" min={0} max={20} />
 		<Slider bind:value={rayleigh} label="Rayleigh" min={0} max={4} />
 		<Slider bind:value={azimuth} label="Azimuth" min={-180} max={180} />
@@ -128,5 +127,5 @@
 				}}
 			/>
 		</Folder>
-	</TabPage>
+	</Folder>
 {/snippet}

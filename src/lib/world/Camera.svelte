@@ -1,17 +1,18 @@
 <script lang="ts">
 	import { T, useTask, useThrelte } from '@threlte/core';
 	import { onMount } from 'svelte';
-	import { Button, RotationEuler, Point, TabPage, Checkbox } from 'svelte-tweakpane-ui';
+	import { Button, RotationEuler, Point, Folder, Checkbox } from 'svelte-tweakpane-ui';
 	import { gsap } from 'gsap';
-	import { addConfigTabPage } from '$lib/configuration/config.svelte';
+	import { configPane } from '$lib/configuration/config.svelte';
 	import { type Transform } from '$lib/utils/graphics.svelte';
+	import { OrbitControls } from '@threlte/extras';
 
 	const { camera } = useThrelte();
 
-	addConfigTabPage(cameraConfigPage);
+	configPane.addConfigTabPage(cameraConfigPage);
 
 	let cameraState: Transform = $state({
-		position: { x: 3.5, y: 8.5, z: 8 },
+		position: { x: 3.5, y: 8.5, z: 10 },
 		rotation: { x: 0, y: 0, z: 0 }
 	});
 
@@ -74,10 +75,15 @@
 </T.PerspectiveCamera>
 
 {#snippet cameraConfigPage()}
-	<TabPage title="Camera">
+	<Folder title="Camera" expanded={false}>
 		<Checkbox bind:value={shouldForceCameraState} label="Move camera with mouse" />
-		<Point bind:value={cameraState.position} label="Position" expanded={true} picker="inline" />
-		<RotationEuler bind:value={cameraState.rotation} label="Rotation" picker={'inline'} />
+		<Point bind:value={cameraState.position} label="Position" picker="inline" />
+		<RotationEuler
+			bind:value={cameraState.rotation}
+			expanded={true}
+			label="Rotation"
+			picker={'inline'}
+		/>
 		<Button on:click={resetCameraState} title="Reset" />
-	</TabPage>
+	</Folder>
 {/snippet}
