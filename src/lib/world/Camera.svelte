@@ -13,22 +13,17 @@
 	} from 'svelte-tweakpane-ui';
 	import { gsap } from 'gsap';
 	import { addConfigTabPage } from '$lib/configuration/config.svelte';
+	import { type Transform } from '$lib/utils/graphics.svelte';
 
 	const { camera } = useThrelte();
 
 	addConfigTabPage(cameraConfigPage);
 
-	interface Transform {
-		position: { x: number; y: number; z: number };
-		rotation: { x: number; y: number; z: number };
-	}
-
-	interface CameraState extends Transform {}
-
-	let cameraState: CameraState = $state({
+	let cameraState: Transform = $state({
 		position: { x: 3.5, y: 8.5, z: 8 },
 		rotation: { x: 0, y: 0, z: 0 }
 	});
+
 	let shouldForceCameraState = $state(false);
 
 	let cameraRotation = $state({
@@ -62,7 +57,7 @@
 		};
 	}
 
-	function applyCameraRotation() {
+	function applyMouseCameraRotation() {
 		cameraRotation.current = gsap.utils.interpolate(
 			cameraRotation.current,
 			cameraRotation.target,
@@ -73,7 +68,7 @@
 
 	useTask(() => {
 		if (shouldForceCameraState) {
-			applyCameraRotation();
+			applyMouseCameraRotation();
 		}
 	});
 </script>
