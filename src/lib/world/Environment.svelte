@@ -3,6 +3,7 @@
 	import Cloud from './Cloud.svelte';
 	import { Spring } from 'svelte/motion';
 	import { Sky } from '@threlte/extras';
+	import { addConfigTabPage } from '$lib/configuration/config.svelte';
 
 	const presets = {
 		sunset: {
@@ -78,6 +79,7 @@
 	});
 
 	// add the config snippet to the global ConfigPane
+	addConfigTabPage(environmentConfigSnippet);
 </script>
 
 <Sky
@@ -91,42 +93,42 @@
 
 <Cloud position={[3, 20, -15]} />
 
-<!-- {#snippet environmentConfigSnippet()} -->
-<Pane title="Environment" position="fixed" y={70} x={10}>
-	<!-- <TabPage title="Environment"> -->
-	<Slider bind:value={turbidity} label="Turbidity" min={0} max={20} />
-	<Slider bind:value={rayleigh} label="Rayleigh" min={0} max={4} />
-	<Slider bind:value={azimuth} label="Azimuth" min={-180} max={180} />
-	<Slider bind:value={elevation} label="Elevation" min={-5} max={90} />
-	<Slider bind:value={mieCoefficient} label="Mie Coefficient" min={0} max={0.1} />
-	<Slider bind:value={mieDirectionalG} label="Mie Directional G" min={0} max={1} />
-	<Slider bind:value={exposure} label="Exposure" min={0} max={2} />
-	<Folder title="Presets">
-		<Button
-			title="Noon"
-			on:click={() => {
-				applyPreset('noon');
-			}}
-		/>
-		<Button
-			title="Afternoon"
-			on:click={() => {
-				applyPreset('afternoon');
-			}}
-		/>
-		<Button
-			title="Sunset"
-			on:click={() => {
-				applyPreset('sunset');
-			}}
-		/>
-		<Button
-			title="Night"
-			on:click={() => {
-				applyPreset('night');
-			}}
-		/>
-	</Folder>
-	<!-- </TabPage> -->
-</Pane>
-<!-- {/snippet} -->
+{#snippet environmentConfigSnippet()}
+	<!-- <Pane title="Environment" position="fixed" y={70} x={10}> -->
+	<TabPage title="Environment">
+		<Slider bind:value={turbidity} label="Turbidity" min={0} max={20} />
+		<Slider bind:value={rayleigh} label="Rayleigh" min={0} max={4} />
+		<Slider bind:value={azimuth} label="Azimuth" min={-180} max={180} />
+		<Slider bind:value={elevation} label="Elevation" min={-5} max={90} />
+		<Slider bind:value={mieCoefficient} label="Mie Coefficient" min={0} max={0.1} />
+		<Slider bind:value={mieDirectionalG} label="Mie Directional G" min={0} max={1} />
+		<Slider bind:value={exposure} label="Exposure" min={0} max={2} />
+		<Folder title="Presets">
+			<Button
+				title="Noon"
+				on:click={() => {
+					applyPreset('noon');
+				}}
+			/>
+			<Button
+				title="Afternoon"
+				on:click={() => {
+					applyPreset('afternoon');
+				}}
+			/>
+			<Button
+				title="Sunset"
+				on:click={() => {
+					applyPreset('sunset');
+				}}
+			/>
+			<Button
+				title="Night"
+				on:click={() => {
+					applyPreset('night');
+				}}
+			/>
+		</Folder>
+	</TabPage>
+{/snippet}
+<!-- </Pane> -->

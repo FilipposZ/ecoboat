@@ -1,20 +1,35 @@
 <script lang="ts">
 	import { T, useTask, useThrelte } from '@threlte/core';
 	import { onMount } from 'svelte';
-	import { Pane, Slider, Button, Folder, RotationEuler, Point } from 'svelte-tweakpane-ui';
+	import {
+		Pane,
+		Slider,
+		Button,
+		Folder,
+		RotationEuler,
+		Point,
+		TabPage,
+		Checkbox
+	} from 'svelte-tweakpane-ui';
 	import { gsap } from 'gsap';
+	import { addConfigTabPage } from '$lib/configuration/config.svelte';
 
 	const { camera } = useThrelte();
 
-	interface CameraState {
+	addConfigTabPage(cameraConfigPage);
+
+	interface Transform {
 		position: { x: number; y: number; z: number };
 		rotation: { x: number; y: number; z: number };
 	}
 
-	const cameraState: CameraState = $state({
+	interface CameraState extends Transform {}
+
+	let cameraState: CameraState = $state({
 		position: { x: 3.5, y: 8.5, z: 8 },
 		rotation: { x: 0, y: 0, z: 0 }
 	});
+	let shouldForceCameraState = $state(false);
 
 	let cameraRotation = $state({
 		current: cameraState.rotation,
@@ -41,35 +56,44 @@
 
 		// console.log(normalizedPosX, normalizedPosY);
 		cameraRotation.target = {
-			x: cameraState.rotation.x - normalizedPosY * 0.1,
-			y: cameraState.rotation.y - normalizedPosX * 0.1,
+			x: 0 - normalizedPosY * 0.1,
+			y: 0 - normalizedPosX * 0.1,
 			z: camera.current.rotation.z
 		};
 	}
 
-	useTask(() => {
+	function applyCameraRotation() {
 		cameraRotation.current = gsap.utils.interpolate(
 			cameraRotation.current,
 			cameraRotation.target,
 			cameraRotation.ease
 		);
-		cameraRotation = cameraRotation;
+		cameraState.rotation = cameraRotation.current;
+	}
+
+	useTask(() => {
+		if (shouldForceCameraState) {
+			applyCameraRotation();
+		}
 	});
 </script>
 
 <T.PerspectiveCamera
 	makeDefault
 	position={[cameraState.position.x, cameraState.position.y, cameraState.position.z]}
-	rotation={[cameraRotation.current.x, cameraRotation.current.y, cameraRotation.current.z]}
+	rotation={[cameraState.rotation.x, cameraState.rotation.y, cameraState.rotation.z]}
 	fov={70}
 >
 	<!-- <OrbitControls enableZoom={true} /> -->
 </T.PerspectiveCamera>
 
-<Pane title="Camera" position="fixed" y={70} x={window.innerWidth - 500}>
-	<Folder title="Camera">
-		<Point bind:value={cameraState.position} label="Position" picker="inline" />
-		<RotationEuler bind:value={cameraRotation.target} label="Rotation" picker={'inline'} />
+<!-- <Pane title="Camera" position="fixed" y={70} x={window.innerWidth - 500}> -->
+{#snippet cameraConfigPage()}
+	<TabPage title="Camera">
+		<Checkbox bind:value={shouldForceCameraState} label="Move camera with mouse" />
+		<Point bind:value={cameraState.position} label="Position" expanded={true} picker="inline" />
+		<RotationEuler bind:value={cameraState.rotation} label="Rotation" picker={'inline'} />
 		<Button on:click={resetCameraState} title="Reset" />
-	</Folder>
-</Pane>
+	</TabPage>
+	<!-- </Pane> -->
+{/snippet}
