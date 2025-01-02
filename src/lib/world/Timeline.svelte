@@ -4,10 +4,9 @@
 	import { useTask } from '@threlte/core';
 	import { MeshLineGeometry, MeshLineMaterial } from '@threlte/extras';
 	import { gsap } from 'gsap';
-
-	$effect(() => {
-		// console.log(progress);
-	});
+	import { Button, RotationEuler, Point, Folder, Checkbox } from 'svelte-tweakpane-ui';
+	import { configPane } from '$lib/configuration/config.svelte';
+	import Frame from './Frame.svelte';
 
 	let lerp = {
 		current: 0,
@@ -16,6 +15,9 @@
 	};
 
 	const { scene, camera } = useThrelte();
+	configPane.addConfigTabPage(timelineConfigSnippet);
+
+	let cameraCurrentPosition = $state(camera.current.position);
 
 	// The path of the camera can be defined in the config pane
 	// https://kitschpatrol.com/svelte-tweakpane-ui/docs/components/cubicbezier
@@ -46,7 +48,11 @@
 			camera.current.position.y,
 			curve.getPoint(lerp.current).z
 		);
-		camera.current.position.copy(newPosition);
+		cameraCurrentPosition = camera.current.position;
+
+		// camera.current.position.copy(newPosition);
+		// cameraCurrentPosition = newPosition;
+
 		// get boat position
 		// camera.current.lookAt(new Vector3(0, 7, 0));
 	});
@@ -56,3 +62,11 @@
 	<MeshLineGeometry points={curve.getPoints(50)} />
 	<MeshLineMaterial width={0.1} color="#fe3d00" />
 </T.Mesh>
+
+<Frame />
+
+{#snippet timelineConfigSnippet()}
+	<Folder title="Timeline" expanded={false}>
+		<Point bind:value={cameraCurrentPosition} label="Position" expanded={true} picker="inline" />
+	</Folder>
+{/snippet}

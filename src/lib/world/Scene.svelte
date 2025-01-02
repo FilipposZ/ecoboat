@@ -4,7 +4,7 @@
 	import Ocean from './Ocean.svelte';
 	import Sailboat from './Sailboat.svelte';
 	import Environment from './Environment.svelte';
-	import Controls from './Controls.svelte';
+	import Timeline from './Timeline.svelte';
 	import CubePhysics from './CubePhysics.svelte';
 	import CubeInteractive from './CubeInteractive.svelte';
 	import ConfigPane from '$lib/configuration/ConfigPane.svelte';
@@ -17,7 +17,7 @@
 
 <Camera />
 
-<Controls />
+<Timeline />
 
 <Environment />
 

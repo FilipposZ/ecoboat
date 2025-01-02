@@ -5,15 +5,13 @@
 	import { beforeNavigate, afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 	import { getMeta } from '$lib/meta';
-	import {
-		PUBLIC_DEFAULT_DESCRIPTION,
-		PUBLIC_DEFAULT_TITLE,
-	} from '$env/static/public';
+	import { PUBLIC_DEFAULT_DESCRIPTION, PUBLIC_DEFAULT_TITLE } from '$env/static/public';
 	import Header from '$lib/components/Header.svelte';
 
-    import { gsap } from 'gsap';
-    import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
-    gsap.registerPlugin(ScrollTrigger);
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+	gsap.registerPlugin(ScrollTrigger);
 
 	let { children } = $props();
 
@@ -39,7 +37,7 @@
 	<title>{meta.title}</title>
 	<meta name="description" content={meta.description} />
 	<link rel="canonical" href={meta.canonicalUrl} />
-    
+
 	<!--
 		  Icons
 		  - https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs
