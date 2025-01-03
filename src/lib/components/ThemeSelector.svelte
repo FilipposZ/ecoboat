@@ -1,9 +1,35 @@
+<script module>
+	import { Subject } from '$lib/patterns/observer.svelte';
+
+	export class Theme extends Subject {
+		#isDarkMode = false;
+
+		get isDarkMode() {
+			const storedValue = localStorage.getItem('isDarkMode') === 'true';
+			if (storedValue !== this.#isDarkMode) {
+				console.log(
+					`isDarkMode is different. Local storage: ${storedValue} and in class: ${this.#isDarkMode}`
+				);
+			}
+			return this.#isDarkMode;
+		}
+
+		set isDarkMode(value: boolean) {
+			localStorage.setItem('isDarkMode', value.toString());
+			this.#isDarkMode = value;
+			this.notify();
+		}
+	}
+
+	export const theme = new Theme();
+</script>
+
 <script lang="ts">
 	let availableThemes = $state(['halloween', 'fantasy']);
 	let isDarkMode = $state(false);
 
 	$effect(() => {
-		console.log('isDarkMode', isDarkMode);
+		theme.isDarkMode = isDarkMode;
 	});
 </script>
 

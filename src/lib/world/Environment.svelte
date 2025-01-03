@@ -4,8 +4,33 @@
 	import { Spring } from 'svelte/motion';
 	import { Sky } from '@threlte/extras';
 	import { configPane } from '$lib/configuration/config.svelte';
+	import { type Observer } from '$lib/patterns/observer.svelte';
 
 	configPane.addConfigTabPage(environmentConfigSnippet);
+
+	import { onMount } from 'svelte';
+	import { theme, type Theme } from '$lib/components/ThemeSelector.svelte';
+
+	class EnvironmentThemeObserver implements Observer {
+		public update(subject: Theme): void {
+			if (subject.isDarkMode) {
+				applyPreset('night');
+			} else {
+				applyPreset('sunset');
+			}
+		}
+	}
+
+	const observer = new EnvironmentThemeObserver();
+	onMount(() => {
+		console.log(`Attaching the ${observer.constructor.name} to the ${theme.constructor.name}`);
+		theme.attach(observer);
+
+		return () => {
+			console.log(`Detaching the ${observer.constructor.name} from the ${theme.constructor.name}`);
+			theme.detach(observer);
+		};
+	});
 
 	const presets = {
 		sunset: {
@@ -68,6 +93,7 @@
 		mieDirectionalG = presets[preset].mieDirectionalG;
 		exposure = presets[preset].exposure;
 	};
+
 	$effect(() => {
 		springValues.set({
 			turbidity: turbidity,

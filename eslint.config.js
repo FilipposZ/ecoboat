@@ -17,7 +17,10 @@ export default [
 				...globals.browser,
 				...globals.node
 			}
-		}
+		},
+        rules: {
+            "@typescript-eslint/no-unsafe-declaration-merging": "warn"
+        }
 	},
 	{
 		files: ['**/*.svelte'],

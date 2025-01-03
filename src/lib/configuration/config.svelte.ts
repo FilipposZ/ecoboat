@@ -1,5 +1,6 @@
 import { type Snippet } from 'svelte';
 
+
 class ConfigPane {
     configPageSnippets: Snippet[] = $state([]);
 
