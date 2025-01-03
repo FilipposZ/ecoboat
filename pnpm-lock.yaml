@@ -74,6 +74,9 @@ importers:
       stripe:
         specifier: ^17.5.0
         version: 17.5.0
+      svelte-tweakpane-ui:
+        specifier: ^1.5.1
+        version: 1.5.1(svelte@5.15.0)
       three:
         specifier: ^0.171.0
         version: 0.171.0
@@ -6627,6 +6630,10 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
+  svelte-persisted-store@0.12.0(svelte@5.15.0):
+    dependencies:
+      svelte: 5.15.0
+
   svelte-tweakpane-ui@1.5.1(svelte@4.2.19):
     dependencies:
       '@kitschpatrol/tweakpane-plugin-camerakit': 0.3.1-beta.2(tweakpane@4.0.5)
@@ -6645,6 +6652,26 @@ snapshots:
       nanoid: 5.0.9
       svelte: 4.2.19
       svelte-persisted-store: 0.12.0(svelte@4.2.19)
+      tweakpane: 4.0.5
+
+  svelte-tweakpane-ui@1.5.1(svelte@5.15.0):
+    dependencies:
+      '@kitschpatrol/tweakpane-plugin-camerakit': 0.3.1-beta.2(tweakpane@4.0.5)
+      '@kitschpatrol/tweakpane-plugin-essentials': 0.2.2-beta.2(tweakpane@4.0.5)
+      '@kitschpatrol/tweakpane-plugin-file-import': 1.1.2-beta.1(tweakpane@4.0.5)
+      '@kitschpatrol/tweakpane-plugin-image': 2.0.1-beta.4(tweakpane@4.0.5)
+      '@kitschpatrol/tweakpane-plugin-inputs': 1.0.4-beta.3(tweakpane@4.0.5)
+      '@kitschpatrol/tweakpane-plugin-profiler': 0.4.2-beta.2(tweakpane@4.0.5)
+      '@kitschpatrol/tweakpane-plugin-rotation': 0.2.1-beta.1(tweakpane@4.0.5)
+      '@kitschpatrol/tweakpane-plugin-textarea': 2.0.1-beta.1(tweakpane@4.0.5)
+      '@kitschpatrol/tweakpane-plugin-waveform': 1.0.4-beta.2(tweakpane@4.0.5)
+      '@tweakpane/core': 2.0.5
+      esm-env: 1.2.1
+      fast-copy: 3.0.2
+      fast-equals: 5.0.1
+      nanoid: 5.0.9
+      svelte: 5.15.0
+      svelte-persisted-store: 0.12.0(svelte@5.15.0)
       tweakpane: 4.0.5
 
   svelte@4.2.19:
