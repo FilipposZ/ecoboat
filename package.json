@@ -75,6 +75,7 @@
 		"posthog-js": "^1.203.1",
 		"postmark": "^4.0.5",
 		"stripe": "^17.5.0",
+		"svelte-tweakpane-ui": "^1.5.1",
 		"three": "^0.171.0"
 	}
 }
