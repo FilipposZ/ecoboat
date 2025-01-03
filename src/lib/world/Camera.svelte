@@ -43,8 +43,8 @@
 
 		// console.log(normalizedPosX, normalizedPosY);
 		cameraRotation.target = {
-			x: 0 - normalizedPosY * 0.1,
-			y: 0 - normalizedPosX * 0.1,
+			x: -normalizedPosY * 0.1,
+			y: -normalizedPosX * 0.1,
 			z: camera.current.rotation.z
 		};
 	}

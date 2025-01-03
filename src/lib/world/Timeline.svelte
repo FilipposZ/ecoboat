@@ -4,7 +4,7 @@
 	import { useTask } from '@threlte/core';
 	import { MeshLineGeometry, MeshLineMaterial } from '@threlte/extras';
 	import { gsap } from 'gsap';
-	import { Button, RotationEuler, Point, Folder, Checkbox } from 'svelte-tweakpane-ui';
+	import { Point, Folder, Checkbox } from 'svelte-tweakpane-ui';
 	import { configPane } from '$lib/configuration/config.svelte';
 	import Frame from './Frame.svelte';
 
@@ -19,6 +19,8 @@
 
 	let cameraCurrentPosition = $state(camera.current.position);
 
+	let forceCameraPositionOnScroll = $state(false);
+
 	// The path of the camera can be defined in the config pane
 	// https://kitschpatrol.com/svelte-tweakpane-ui/docs/components/cubicbezier
 	const curve = new CatmullRomCurve3(
@@ -31,13 +33,26 @@
 		true
 	);
 
-	const speedModifier = 0.001;
+	const speedModifier = 0.0005;
 
 	window.addEventListener('wheel', (e) => updateProgress(e.deltaY * speedModifier));
 
 	function updateProgress(offset: number) {
 		lerp.target += offset;
 		lerp.target = gsap.utils.clamp(0, 1, lerp.target);
+	}
+
+	function moveCameraToPosition(position: Vector3) {
+		const timeline = gsap.timeline().to(camera.current.position, {
+			x: position.x,
+			y: position.y,
+			z: position.z,
+			duration: 3,
+			ease: 'power2.inOut'
+		});
+		camera.current.position.copy(position);
+
+		cameraCurrentPosition = position;
 	}
 
 	useTask((delta) => {
@@ -48,13 +63,14 @@
 			camera.current.position.y,
 			curve.getPoint(lerp.current).z
 		);
-		cameraCurrentPosition = camera.current.position;
 
-		// camera.current.position.copy(newPosition);
-		// cameraCurrentPosition = newPosition;
+		if (forceCameraPositionOnScroll) {
+			moveCameraToPosition(newPosition);
+			// camera.current.position.copy(newPosition);
 
-		// get boat position
-		// camera.current.lookAt(new Vector3(0, 7, 0));
+			// look at the boat
+			camera.current.lookAt(new Vector3(0, 7, 0));
+		}
 	});
 </script>
 
@@ -67,6 +83,7 @@
 
 {#snippet timelineConfigSnippet()}
 	<Folder title="Timeline" expanded={false}>
+		<Checkbox bind:value={forceCameraPositionOnScroll} label="Move camera on scroll" />
 		<Point bind:value={cameraCurrentPosition} label="Position" expanded={true} picker="inline" />
 	</Folder>
 {/snippet}
