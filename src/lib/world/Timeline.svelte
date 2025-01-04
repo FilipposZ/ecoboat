@@ -15,7 +15,7 @@
 	};
 
 	const { scene, camera } = useThrelte();
-	configPane.addConfigTabPage(timelineConfigSnippet);
+	configPane.addConfigSnippet(timelineConfigSnippet);
 
 	let cameraCurrentPosition = $state(camera.current.position);
 
