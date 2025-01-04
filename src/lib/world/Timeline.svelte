@@ -1,21 +1,26 @@
 <script lang="ts">
-	import { CatmullRomCurve3, Vector3 } from 'three';
-	import { T, useThrelte } from '@threlte/core';
-	import { useTask } from '@threlte/core';
+	import { configPane } from '$lib/configuration/config.svelte';
+	import { T, useTask, useThrelte } from '@threlte/core';
 	import { MeshLineGeometry, MeshLineMaterial } from '@threlte/extras';
 	import { gsap } from 'gsap';
-	import { Point, Folder, Checkbox } from 'svelte-tweakpane-ui';
-	import { configPane } from '$lib/configuration/config.svelte';
+	import { onMount } from 'svelte';
+	import { Checkbox, Folder, Point } from 'svelte-tweakpane-ui';
+	import { CatmullRomCurve3, Vector3 } from 'three';
 	import Frame from './Frame.svelte';
 
+	const { scene, camera } = useThrelte();
 	let lerp = {
 		current: 0,
 		target: 0,
 		ease: 0.01
 	};
 
-	const { scene, camera } = useThrelte();
-	configPane.addConfigSnippet(timelineConfigSnippet);
+	onMount(() => {
+		configPane.addConfigSnippet(timelineConfigSnippet);
+		return () => {
+			configPane.removeConfigSnippet(timelineConfigSnippet);
+		};
+	});
 
 	let cameraCurrentPosition = $state(camera.current.position);
 
