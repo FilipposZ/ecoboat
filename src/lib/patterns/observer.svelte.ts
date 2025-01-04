@@ -8,7 +8,6 @@ export class Subject {
     private observers: Observer[] = [];
 
     public attach(observer: Observer): void {
-        console.log(this.observers);
         const isExist = this.observers.includes(observer);
         if (isExist) {
             return console.log(`${this.constructor.name}: The ${observer.constructor.name} has been attached already.`);

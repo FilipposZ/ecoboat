@@ -6,7 +6,7 @@
 	import { configPane } from '$lib/configuration/config.svelte';
 	import { type Observer } from '$lib/patterns/observer.svelte';
 
-	configPane.addConfigTabPage(environmentConfigSnippet);
+	configPane.addConfigSnippet(environmentConfigSnippet);
 
 	import { onMount } from 'svelte';
 	import { theme, type Theme } from '$lib/components/ThemeSelector.svelte';

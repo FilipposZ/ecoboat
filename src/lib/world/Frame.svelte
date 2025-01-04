@@ -8,7 +8,7 @@
 
 	const { camera } = useThrelte();
 
-	configPane.addConfigTabPage(frameConfigTabPage);
+	configPane.addConfigSnippet(frameConfigTabPage);
 
 	import { DEG2RAD } from 'three/src/math/MathUtils.js';
 	class TextOptions {
