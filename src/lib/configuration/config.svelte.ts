@@ -7,6 +7,10 @@ class ConfigPane {
     addConfigSnippet(snippet: Snippet) {
         this.configPageSnippets.push(snippet);
     }
+
+    removeConfigSnippet(snippet: Snippet) {
+        this.configPageSnippets = this.configPageSnippets.filter(s => s !== snippet);
+    }
 }
 
 export const configPane = new ConfigPane();

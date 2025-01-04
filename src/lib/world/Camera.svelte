@@ -1,15 +1,12 @@
 <script lang="ts">
-	import { T, useTask, useThrelte } from '@threlte/core';
-	import { onMount } from 'svelte';
-	import { Button, RotationEuler, Point, Folder, Checkbox } from 'svelte-tweakpane-ui';
-	import { gsap } from 'gsap';
 	import { configPane } from '$lib/configuration/config.svelte';
 	import { type Transform } from '$lib/utils/graphics.svelte';
-	import { OrbitControls } from '@threlte/extras';
+	import { T, useTask, useThrelte } from '@threlte/core';
+	import { gsap } from 'gsap';
+	import { onMount } from 'svelte';
+	import { Button, Checkbox, Folder, Point, RotationEuler } from 'svelte-tweakpane-ui';
 
 	const { camera } = useThrelte();
-
-	configPane.addConfigSnippet(cameraConfigPage);
 
 	let cameraState: { current: Transform; target: Transform } = $state({
 		current: { position: { x: 3.5, y: 8.5, z: 10 }, rotation: { x: 0, y: 0, z: 0 } },
@@ -25,9 +22,11 @@
 
 	onMount(() => {
 		window.addEventListener('pointermove', rotateCameraWithMouse);
+		configPane.addConfigSnippet(cameraConfigPage);
 
 		return () => {
 			window.removeEventListener('pointermove', rotateCameraWithMouse);
+			configPane.removeConfigSnippet(cameraConfigPage);
 		};
 	});
 
@@ -45,7 +44,11 @@
 
 	useTask(() => {
 		if (shouldForceCameraState) {
-			cameraState.current = gsap.utils.interpolate(cameraState.current, cameraState.target, 0.1);
+			cameraState.current.rotation = gsap.utils.interpolate(
+				cameraState.current.rotation,
+				cameraState.target.rotation,
+				0.1
+			);
 		}
 	});
 </script>

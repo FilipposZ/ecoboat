@@ -1,15 +1,13 @@
 <script lang="ts">
-	import { Folder, Slider, Button } from 'svelte-tweakpane-ui';
-	import Cloud from './Cloud.svelte';
-	import { Spring } from 'svelte/motion';
-	import { Sky } from '@threlte/extras';
 	import { configPane } from '$lib/configuration/config.svelte';
 	import { type Observer } from '$lib/patterns/observer.svelte';
+	import { Sky } from '@threlte/extras';
+	import { Button, Folder, Slider } from 'svelte-tweakpane-ui';
+	import { Spring } from 'svelte/motion';
+	import Cloud from './Cloud.svelte';
 
-	configPane.addConfigSnippet(environmentConfigSnippet);
-
-	import { onMount } from 'svelte';
 	import { theme, type Theme } from '$lib/components/ThemeSelector.svelte';
+	import { onMount } from 'svelte';
 
 	class EnvironmentThemeObserver implements Observer {
 		public update(subject: Theme): void {
@@ -23,12 +21,12 @@
 
 	const observer = new EnvironmentThemeObserver();
 	onMount(() => {
-		console.log(`Attaching the ${observer.constructor.name} to the ${theme.constructor.name}`);
 		theme.attach(observer);
+		configPane.addConfigSnippet(environmentConfigSnippet);
 
 		return () => {
-			console.log(`Detaching the ${observer.constructor.name} from the ${theme.constructor.name}`);
 			theme.detach(observer);
+			configPane.removeConfigSnippet(environmentConfigSnippet);
 		};
 	});
 
@@ -120,13 +118,6 @@
 
 {#snippet environmentConfigSnippet()}
 	<Folder title="Environment" expanded={false}>
-		<Slider bind:value={turbidity} label="Turbidity" min={0} max={20} />
-		<Slider bind:value={rayleigh} label="Rayleigh" min={0} max={4} />
-		<Slider bind:value={azimuth} label="Azimuth" min={-180} max={180} />
-		<Slider bind:value={elevation} label="Elevation" min={-5} max={90} />
-		<Slider bind:value={mieCoefficient} label="Mie Coefficient" min={0} max={0.1} />
-		<Slider bind:value={mieDirectionalG} label="Mie Directional G" min={0} max={1} />
-		<Slider bind:value={exposure} label="Exposure" min={0} max={2} />
 		<Folder title="Presets">
 			<Button
 				title="Noon"
@@ -152,6 +143,15 @@
 					applyPreset('night');
 				}}
 			/>
+		</Folder>
+		<Folder title="Advanced options">
+			<Slider bind:value={turbidity} label="Turbidity" min={0} max={20} />
+			<Slider bind:value={rayleigh} label="Rayleigh" min={0} max={4} />
+			<Slider bind:value={azimuth} label="Azimuth" min={-180} max={180} />
+			<Slider bind:value={elevation} label="Elevation" min={-5} max={90} />
+			<Slider bind:value={mieCoefficient} label="Mie Coefficient" min={0} max={0.1} />
+			<Slider bind:value={mieDirectionalG} label="Mie Directional G" min={0} max={1} />
+			<Slider bind:value={exposure} label="Exposure" min={0} max={2} />
 		</Folder>
 	</Folder>
 {/snippet}
