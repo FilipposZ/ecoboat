@@ -1,16 +1,23 @@
 <script lang="ts">
-	import { Plane, Vector3 } from 'three';
-	import { useThrelte } from '@threlte/core';
-	import { gsap } from 'gsap';
-	import { Folder, Text as PaneText, Slider, Point, Textarea, Checkbox } from 'svelte-tweakpane-ui';
-	import { Text, TransformControls } from '@threlte/extras';
 	import { configPane } from '$lib/configuration/config.svelte';
+	import { useThrelte } from '@threlte/core';
+	import { Text } from '@threlte/extras';
+	import { gsap } from 'gsap';
+	import { onMount } from 'svelte';
+	import { Checkbox, Folder, Point, Slider, Textarea } from 'svelte-tweakpane-ui';
+	import { Vector3 } from 'three';
+	import { DEG2RAD } from 'three/src/math/MathUtils.js';
 
 	const { camera } = useThrelte();
 
-	configPane.addConfigSnippet(frameConfigTabPage);
+	onMount(() => {
+		configPane.addConfigSnippet(frameConfigTabPage);
 
-	import { DEG2RAD } from 'three/src/math/MathUtils.js';
+		return () => {
+			configPane.removeConfigSnippet(frameConfigTabPage);
+		};
+	});
+
 	class TextOptions {
 		value: string = $state('A trip with the boat ..');
 		position: Vector3 = $state(new Vector3(0, 9.2, 3.4));
