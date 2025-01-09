@@ -13,7 +13,7 @@
 		target: { position: { x: 3.5, y: 8.5, z: 10 }, rotation: { x: 0, y: 0, z: 0 } }
 	});
 
-	let shouldForceCameraState = $state(false);
+	let shouldMoveCameraWithMouse = $state(false);
 
 	function resetCameraState() {
 		cameraState.target.position = { x: 3.5, y: 8.5, z: 8 };
@@ -36,14 +36,14 @@
 
 		// console.log(normalizedPosX, normalizedPosY);
 		cameraState.target.rotation = {
-			x: -normalizedPosY * 0.1,
-			y: -normalizedPosX * 0.1,
+			x: camera.current.position.x - normalizedPosY * 0.1,
+			y: camera.current.position.y - normalizedPosX * 0.1,
 			z: camera.current.rotation.z
 		};
 	}
 
 	useTask(() => {
-		if (shouldForceCameraState) {
+		if (shouldMoveCameraWithMouse) {
 			cameraState.current.rotation = gsap.utils.interpolate(
 				cameraState.current.rotation,
 				cameraState.target.rotation,
@@ -72,10 +72,15 @@
 
 {#snippet cameraConfigPage()}
 	<Folder title="Camera" expanded={false}>
-		<Checkbox bind:value={shouldForceCameraState} label="Move camera with mouse" />
-		<Point bind:value={cameraState.target.position} label="Position" picker="inline" />
+		<Checkbox bind:value={shouldMoveCameraWithMouse} label="Move camera with mouse" />
+		<Point
+			bind:value={() => camera.current.position, (value) => camera.current.position.copy(value)}
+			label="Position"
+			picker="inline"
+		/>
 		<RotationEuler
-			bind:value={cameraState.target.rotation}
+			bind:value={() => camera.current.rotation,
+			(value) => camera.current.rotation.set(value.x, value.y, value.z)}
 			expanded={true}
 			label="Rotation"
 			picker={'inline'}
