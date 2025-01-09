@@ -117,7 +117,7 @@
 <Cloud position={[3, 20, -15]} />
 
 {#snippet environmentConfigSnippet()}
-	<Folder title="Environment" expanded={false}>
+	<Folder title="Skybox" expanded={false}>
 		<Folder title="Presets">
 			<Button
 				title="Noon"
