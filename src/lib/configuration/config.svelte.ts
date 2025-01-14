@@ -2,14 +2,14 @@ import { type Snippet } from 'svelte';
 
 
 class ConfigPane {
-    configPageSnippets: Snippet[] = $state([]);
+    configPageSnippets: Snippet<[]>[] = $state([]);
 
-    addConfigSnippet(snippet: Snippet) {
-        this.configPageSnippets.push(snippet);
+    addConfigSnippet(snip: Snippet<[]>) {
+        this.configPageSnippets.push(snip);
     }
 
-    removeConfigSnippet(snippet: Snippet) {
-        this.configPageSnippets = this.configPageSnippets.filter(s => s !== snippet);
+    removeConfigSnippet(snip: Snippet<[]>) {
+        this.configPageSnippets = this.configPageSnippets.filter(s => s !== snip);
     }
 }
 
