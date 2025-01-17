@@ -1,12 +1,12 @@
 <script>
-	import '../app.css';
-	import posthog from 'posthog-js';
 	import { browser, dev } from '$app/environment';
-	import { beforeNavigate, afterNavigate } from '$app/navigation';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import { page } from '$app/state';
-	import { getMeta } from '$lib/meta';
 	import { PUBLIC_DEFAULT_DESCRIPTION, PUBLIC_DEFAULT_TITLE } from '$env/static/public';
 	import Header from '$lib/components/Header.svelte';
+	import { getMeta } from '$lib/meta';
+	import posthog from 'posthog-js';
+	import '../app.css';
 
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
