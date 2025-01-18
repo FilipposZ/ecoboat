@@ -4,38 +4,30 @@
 
 	const faqs: Array<Faq> = [
 		{
-			question: 'What is Escape Room Madness?',
-			answer: 'The solution to all your escape room needs!'
+			question: 'What is the Ecoboat?',
+			answer:
+				'The Ecoboat Museum is a floating, self-sustainable vessel that doubles as a museum and rental space. It showcases innovative systems that work harmoniously with the environment.'
 		},
 		{
-			question: 'How do I get started?',
-			answer: 'Contact us!'
+			question: `What can I expect during a tour?`,
+			answer:
+				'Our 6-8 hour tours include interactive exhibits, hands-on activities, and an inspiring journey into sustainable living. Guests of all ages can explore how humanity and nature can coexist.'
 		},
 		{
-			question: 'How can I support Escape Room Madness?',
-			answer: 'Invest in us, with your time or your money!'
+			question: 'How are the systems on the Ecoboat sustainable?',
+			answer:
+				'The Ecoboat uses renewable energy, such as solar and wind power, and features systems like water filtration and waste reduction. These systems are designed to minimize impact while benefiting the environment.'
 		},
-        {
-            question: 'What kind of escape rooms benefit from your services?',
-            answer: 'Our sound solutions are ideal for any escape room seeking a heightened sense of immersion. Whether it\'s a horror, adventure, sci-fi, or historical theme, our team can craft sounds that align perfectly with your storyline.'
-        },
-        {
-            question: 'How long does it take to implement a custom sound design?',
-            answer: 'The timeline varies depending on the complexity of the project, but on average, custom soundscapes take about 2–4 weeks from concept to installation.'
-        },
-        {
-            question: 'Do you provide on-site installation and setup?',
-            answer: 'Yes, we offer on-site setup to ensure everything runs smoothly and aligns perfectly with your escape room’s layout.'
-        },
-        {
-            question: 'Can you create interactive sound triggers?',
-            answer: 'Absolutely. We specialize in designing audio that reacts to player actions, making every experience dynamic and unpredictable.'
-        },
-        {
-            question: 'What makes your services different from standard sound systems?',
-            answer: 'We go beyond background music by crafting an interactive audio environment tailored to your theme. Our team focuses on the details to make every sound contribute to the narrative, creating a fully immersive experience.'
-        }
-    ];
+		{
+			question: 'Who is the Ecoboat experience for?',
+			answer: `The Ecoboat welcomes everyone, from families to businesses, educators, and nature enthusiasts. It's perfect for anyone curious about sustainability and innovation.`
+		},
+		{
+			question: 'How can I support the Ecoboat?',
+			answer:
+				'You can support us by joining a tour, booking an event, or spreading the word. Signing up for our newsletter is another great way to stay connected.'
+		}
+	];
 </script>
 
 <Container>

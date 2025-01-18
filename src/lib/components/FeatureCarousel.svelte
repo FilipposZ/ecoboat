@@ -36,7 +36,7 @@
 <Container>
 	<div class="py-24 md:py-32">
 		<h2 class="font-bold text-2xl md:text-4xl mb-16 text-center">
-			Everything you need to bring life to your rooms
+			Explore what the experience has to offer
 		</h2>
 		<!-- on mobile show small icons without text -->
 		<div class="w-fit mx-auto mb-5 sm:hidden">

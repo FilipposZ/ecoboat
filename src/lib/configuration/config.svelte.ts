@@ -4,8 +4,12 @@ import { type Snippet } from 'svelte';
 class ConfigPane {
     configPageSnippets: Snippet[] = $state([]);
 
-    addConfigTabPage(snippet: Snippet) {
+    addConfigSnippet(snippet: Snippet) {
         this.configPageSnippets.push(snippet);
+    }
+
+    removeConfigSnippet(snippet: Snippet) {
+        this.configPageSnippets = this.configPageSnippets.filter(s => s !== snippet);
     }
 }
 
