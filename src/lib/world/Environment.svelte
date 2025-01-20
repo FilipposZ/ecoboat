@@ -68,22 +68,26 @@
 			exposure: 0.26
 		}
 	};
-	const springValues = new Spring(presets.sunset, {
+
+    const initialPreset = theme.isDarkMode ? presets.night : presets.sunset;
+    
+	const springValues = new Spring(initialPreset, {
 		damping: 0.95,
 		precision: 0.0001,
 		stiffness: 0.05
 	});
 
-	let turbidity = $state(presets.sunset.turbidity);
-	let rayleigh = $state(presets.sunset.rayleigh);
-	let azimuth = $state(presets.sunset.azimuth);
-	let elevation = $state(presets.sunset.elevation);
-	let mieCoefficient = $state(presets.sunset.mieCoefficient);
-	let mieDirectionalG = $state(presets.sunset.mieDirectionalG);
-	let exposure = $state(presets.sunset.exposure);
+	let turbidity = $state(initialPreset.turbidity);
+	let rayleigh = $state(initialPreset.rayleigh);
+	let azimuth = $state(initialPreset.azimuth);
+	let elevation = $state(initialPreset.elevation);
+	let mieCoefficient = $state(initialPreset.mieCoefficient);
+	let mieDirectionalG = $state(initialPreset.mieDirectionalG);
+	let exposure = $state(initialPreset.exposure);
 
+    
 	const applyPreset = (preset: keyof typeof presets) => {
-		turbidity = presets[preset].turbidity;
+        turbidity = presets[preset].turbidity;
 		rayleigh = presets[preset].rayleigh;
 		azimuth = presets[preset].azimuth;
 		elevation = presets[preset].elevation;
@@ -91,7 +95,7 @@
 		mieDirectionalG = presets[preset].mieDirectionalG;
 		exposure = presets[preset].exposure;
 	};
-
+    
 	$effect(() => {
 		springValues.set({
 			turbidity: turbidity,
