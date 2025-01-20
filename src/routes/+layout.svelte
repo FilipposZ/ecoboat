@@ -4,6 +4,8 @@
 	import { page } from '$app/state';
 	import { PUBLIC_DEFAULT_DESCRIPTION, PUBLIC_DEFAULT_TITLE } from '$env/static/public';
 	import Header from '$lib/components/Header.svelte';
+	import Footer from '$lib/components/Footer.svelte';
+
 	import { getMeta } from '$lib/meta';
 	import posthog from 'posthog-js';
 	import '../app.css';
@@ -80,3 +82,4 @@
 
 <Header></Header>
 {@render children()}
+<Footer></Footer>
