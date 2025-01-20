@@ -12,7 +12,7 @@
 	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 	const links: Array<Link> = [
-		{ name: 'Experience', href: '/ecoboat' },
+		{ name: 'Experience', href: '/experience' },
 		{ name: 'About', href: '/#about' },
 		{ name: 'Pricing', href: '/#pricing' },
 		{ name: 'FAQ', href: '/#faq' }
