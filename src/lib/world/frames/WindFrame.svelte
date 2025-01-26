@@ -42,7 +42,7 @@
 					trigger: '.second-move',
 					start: 'top bottom',
 					end: 'bottom top',
-					scrub: true
+					scrub: 0.6
 				}
 			})
 			.to(camera.current.position, {
