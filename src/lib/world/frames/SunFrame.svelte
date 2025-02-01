@@ -48,16 +48,14 @@
 			.to(camera.current.position, {
 				x: frameOptions.camera.position.x,
 				y: frameOptions.camera.position.y,
-				z: frameOptions.camera.position.z,
-				duration: 4
+				z: frameOptions.camera.position.z
 			})
 			.to(
 				camera.current.rotation,
 				{
 					x: frameOptions.camera.rotation.x,
 					y: frameOptions.camera.rotation.y,
-					z: frameOptions.camera.rotation.z,
-					duration: 4
+					z: frameOptions.camera.rotation.z
 				},
 				'<'
 			)
@@ -65,7 +63,6 @@
 				frameOptions.text,
 				{
 					opacity: 1,
-					duration: 4,
 					ease: 'back'
 				},
 				'>-50%'

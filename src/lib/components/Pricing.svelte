@@ -12,18 +12,6 @@
 	};
 </script>
 
-<!-- premium package -->
-<!-- <div class="card">
-	<h3>{title}</h3>
-	<div>${price}usd</div>
-	<ul>
-		{#each features as feature}
-			<li><Check /> {feature}</li>
-		{/each}
-	</ul>
-	<a class="btn" href="/">Get Justship</a>
-</div> -->
-
 <Container>
 	<div id="pricing" class="py-24 sm:py-32">
 		<h2 class="text-center text-md text-base text-base-content/70 font-semibold leading-7">
@@ -37,7 +25,7 @@
 			<div class="card p-8 w-80 ring-2 ring-base-200 shadow-xl">
 				<h3 class="text-xl font-extrabold mb-2 text-base-content text-opacity-80">Basic</h3>
 				<div class="text-5xl font-extrabold leading-snug">
-					$100 <span class="font-bold text-base">usd</span>
+					€150 <span class="font-bold text-base">eur</span>
 				</div>
 				<ul class="space-y-2 mt-3 mb-20">
 					{#each featuresBasic.included as feature}
@@ -66,7 +54,7 @@
 
 				<h3 class="text-xl font-extrabold mb-2 text-base-content text-opacity-80">Premium</h3>
 				<div class="text-5xl font-extrabold leading-snug">
-					$120 <span class="font-bold text-base">usd</span>
+					€200 <span class="font-bold text-base">eur</span>
 				</div>
 				<ul class="space-y-2 mt-3 mb-20">
 					{#each featuresPremium.included as feature}

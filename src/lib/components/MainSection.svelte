@@ -11,9 +11,10 @@
 	let { children, alignment = 'left', ...restProps }: MainSectionProps = $props();
 
 	let divContainer: HTMLDivElement;
-	const borderRadius = '20rem';
 
 	onMount(() => {
+		const borderRadius = window.innerWidth <= 768 ? '10rem' : '20rem';
+
 		gsap.from(divContainer, {
 			scrollTrigger: {
 				trigger: divContainer,

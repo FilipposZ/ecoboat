@@ -27,25 +27,31 @@
 			value: 'A trip with the boat',
 			position: new Vector3(0, 9.2, 3.4),
 			rotation: new Euler(0, 0, 0)
-		}),
-		scrollTrigger: false
+		})
 	});
 
-	timeline.add(
+	timeline.addLabel('first-move').add(
 		gsap
-			.timeline()
+			.timeline({
+				scrollTrigger: {
+					trigger: '.first-move',
+					start: 'top top',
+					end: 'bottom top'
+					// scrub: 0.6
+				}
+			})
 			.to(camera.current.position, {
 				x: frameOptions.camera.position.x,
 				y: frameOptions.camera.position.y,
 				z: frameOptions.camera.position.z,
-				duration: 3,
+				duration: 10,
 				ease: 'expo.out'
 			})
 			.to(
 				frameOptions.text,
 				{
 					opacity: 1,
-					duration: 3,
+					duration: 10,
 					ease: 'back'
 				},
 				'>-50%'
