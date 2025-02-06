@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { configPane } from '$lib/configuration/config.svelte';
 	import { type Observer } from '$lib/patterns/observer.svelte';
 	import { Sky } from '@threlte/extras';
-	import { Button, Folder, Slider } from 'svelte-tweakpane-ui';
 	import { Spring } from 'svelte/motion';
 	import Cloud from './Cloud.svelte';
 
@@ -22,11 +20,9 @@
 	const observer = new EnvironmentThemeObserver();
 	onMount(() => {
 		theme.attach(observer);
-		configPane.addConfigSnippet(environmentConfigSnippet);
 
 		return () => {
 			theme.detach(observer);
-			configPane.removeConfigSnippet(environmentConfigSnippet);
 		};
 	});
 
@@ -69,8 +65,8 @@
 		}
 	};
 
-    const initialPreset = theme.isDarkMode ? presets.night : presets.sunset;
-    
+	const initialPreset = theme.isDarkMode ? presets.night : presets.sunset;
+
 	const springValues = new Spring(initialPreset, {
 		damping: 0.95,
 		precision: 0.0001,
@@ -85,9 +81,8 @@
 	let mieDirectionalG = $state(initialPreset.mieDirectionalG);
 	let exposure = $state(initialPreset.exposure);
 
-    
 	const applyPreset = (preset: keyof typeof presets) => {
-        turbidity = presets[preset].turbidity;
+		turbidity = presets[preset].turbidity;
 		rayleigh = presets[preset].rayleigh;
 		azimuth = presets[preset].azimuth;
 		elevation = presets[preset].elevation;
@@ -95,7 +90,7 @@
 		mieDirectionalG = presets[preset].mieDirectionalG;
 		exposure = presets[preset].exposure;
 	};
-    
+
 	$effect(() => {
 		springValues.set({
 			turbidity: turbidity,
@@ -119,43 +114,3 @@
 />
 
 <Cloud position={[3, 20, -15]} />
-
-{#snippet environmentConfigSnippet()}
-	<Folder title="Skybox" expanded={false}>
-		<Folder title="Presets">
-			<Button
-				title="Noon"
-				on:click={() => {
-					applyPreset('noon');
-				}}
-			/>
-			<Button
-				title="Afternoon"
-				on:click={() => {
-					applyPreset('afternoon');
-				}}
-			/>
-			<Button
-				title="Sunset"
-				on:click={() => {
-					applyPreset('sunset');
-				}}
-			/>
-			<Button
-				title="Night"
-				on:click={() => {
-					applyPreset('night');
-				}}
-			/>
-		</Folder>
-		<Folder title="Advanced options">
-			<Slider bind:value={turbidity} label="Turbidity" min={0} max={20} />
-			<Slider bind:value={rayleigh} label="Rayleigh" min={0} max={4} />
-			<Slider bind:value={azimuth} label="Azimuth" min={-180} max={180} />
-			<Slider bind:value={elevation} label="Elevation" min={-5} max={90} />
-			<Slider bind:value={mieCoefficient} label="Mie Coefficient" min={0} max={0.1} />
-			<Slider bind:value={mieDirectionalG} label="Mie Directional G" min={0} max={1} />
-			<Slider bind:value={exposure} label="Exposure" min={0} max={2} />
-		</Folder>
-	</Folder>
-{/snippet}

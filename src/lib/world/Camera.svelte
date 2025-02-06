@@ -1,10 +1,7 @@
 <script lang="ts">
-	import { configPane } from '$lib/configuration/config.svelte';
 	import { type Transform } from '$lib/utils/graphics.svelte';
 	import { T, useTask, useThrelte } from '@threlte/core';
 	import { gsap } from 'gsap';
-	import { onMount } from 'svelte';
-	import { Button, Checkbox, Folder, Point, RotationEuler } from 'svelte-tweakpane-ui';
 
 	const { camera } = useThrelte();
 
@@ -19,16 +16,6 @@
 		cameraState.target.position = { x: 3.5, y: 8.5, z: 8 };
 		cameraState.target.rotation = { x: 0, y: 0, z: 0 };
 	}
-
-	onMount(() => {
-		window.addEventListener('pointermove', rotateCameraWithMouse);
-		configPane.addConfigSnippet(cameraConfigPage);
-
-		return () => {
-			window.removeEventListener('pointermove', rotateCameraWithMouse);
-			configPane.removeConfigSnippet(cameraConfigPage);
-		};
-	});
 
 	function rotateCameraWithMouse(event: PointerEvent) {
 		const normalizedPosX = (event.x / window.innerWidth) * 2 - 1;
@@ -69,22 +56,3 @@
 >
 	<!-- <OrbitControls enableZoom={true} /> -->
 </T.PerspectiveCamera>
-
-{#snippet cameraConfigPage()}
-	<Folder title="Camera" expanded={false}>
-		<Checkbox bind:value={shouldMoveCameraWithMouse} label="Move camera with mouse" />
-		<Point
-			bind:value={() => camera.current.position, (value) => camera.current.position.copy(value)}
-			label="Position"
-			picker="inline"
-		/>
-		<RotationEuler
-			bind:value={() => camera.current.rotation,
-			(value) => camera.current.rotation.set(value.x, value.y, value.z)}
-			expanded={true}
-			label="Rotation"
-			picker={'inline'}
-		/>
-		<Button on:click={resetCameraState} title="Reset" />
-	</Folder>
-{/snippet}
