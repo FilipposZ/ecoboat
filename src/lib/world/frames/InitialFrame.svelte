@@ -1,17 +1,11 @@
 <script lang="ts">
-	import { useTask, useThrelte } from '@threlte/core';
-	import { Text, useViewport } from '@threlte/extras';
+	import { useThrelte } from '@threlte/core';
+	import { Text } from '@threlte/extras';
 	import { gsap } from 'gsap';
 	import { Euler, Vector3 } from 'three';
 	import { Frame, TextOptions } from './Frame.svelte';
 
 	const { camera } = useThrelte();
-	const viewport = useViewport();
-
-	useTask(() => {
-		const { width, height, distance } = viewport.current;
-		console.log(width, height, distance);
-	});
 
 	const { timeline = gsap.timeline() } = $props();
 

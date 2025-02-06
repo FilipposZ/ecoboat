@@ -33,7 +33,7 @@
 <div class="space-y-40 relative pointer-events-none">
 	<Preloader />
 
-	<MainSection class="first-move !bg-transparent relative">
+	<MainSection class="first-move relative">
 		<h2 class="mb-20">Set sail towards a better world</h2>
 		<p>
 			Embark on a meaningful journey, where innovation meets nature, where you can leave a lasting,
