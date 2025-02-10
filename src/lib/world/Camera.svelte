@@ -1,90 +1,41 @@
 <script lang="ts">
-	import { configPane } from '$lib/configuration/config.svelte';
-	import { type Transform } from '$lib/utils/graphics.svelte';
-	import { T, useTask, useThrelte } from '@threlte/core';
-	import { gsap } from 'gsap';
+	import { T, useThrelte } from '@threlte/core';
 	import { onMount } from 'svelte';
-	import { Button, Checkbox, Folder, Point, RotationEuler } from 'svelte-tweakpane-ui';
+	import { Vector3 } from 'three';
 
 	const { camera } = useThrelte();
 
-	let cameraState: { current: Transform; target: Transform } = $state({
-		current: { position: { x: 3.5, y: 8.5, z: 10 }, rotation: { x: 0, y: 0, z: 0 } },
-		target: { position: { x: 3.5, y: 8.5, z: 10 }, rotation: { x: 0, y: 0, z: 0 } }
+	let mousePos = $state({
+		x: 0,
+		y: 0
 	});
 
-	let shouldMoveCameraWithMouse = $state(false);
+	let prevMousePos = { x: 0, y: 0 };
 
-	function resetCameraState() {
-		cameraState.target.position = { x: 3.5, y: 8.5, z: 8 };
-		cameraState.target.rotation = { x: 0, y: 0, z: 0 };
+	const ROTATION_SPEED_MODIFIER = 0.1;
+
+	function rotateCameraWithMouse(event: PointerEvent) {
+		mousePos.x = (event.x / window.innerWidth) * 2 - 1;
+		mousePos.y = (event.y / window.innerHeight) * 2 - 1;
 	}
+
+	$effect(() => {
+		const offsetRotationX = prevMousePos.x - mousePos.x;
+		const offsetRotationY = prevMousePos.y - mousePos.y;
+		camera.current.rotateOnAxis(new Vector3(0, 1, 0), offsetRotationX * ROTATION_SPEED_MODIFIER);
+		camera.current.rotateOnAxis(new Vector3(1, 0, 0), offsetRotationY * ROTATION_SPEED_MODIFIER);
+		prevMousePos = { ...mousePos };
+	});
 
 	onMount(() => {
 		window.addEventListener('pointermove', rotateCameraWithMouse);
-		configPane.addConfigSnippet(cameraConfigPage);
 
 		return () => {
 			window.removeEventListener('pointermove', rotateCameraWithMouse);
-			configPane.removeConfigSnippet(cameraConfigPage);
 		};
-	});
-
-	function rotateCameraWithMouse(event: PointerEvent) {
-		const normalizedPosX = (event.x / window.innerWidth) * 2 - 1;
-		const normalizedPosY = (event.y / window.innerHeight) * 2 - 1;
-
-		// console.log(normalizedPosX, normalizedPosY);
-		cameraState.target.rotation = {
-			x: camera.current.position.x - normalizedPosY * 0.1,
-			y: camera.current.position.y - normalizedPosX * 0.1,
-			z: camera.current.rotation.z
-		};
-	}
-
-	useTask(() => {
-		if (shouldMoveCameraWithMouse) {
-			cameraState.current.rotation = gsap.utils.interpolate(
-				cameraState.current.rotation,
-				cameraState.target.rotation,
-				0.1
-			);
-		}
 	});
 </script>
 
-<T.PerspectiveCamera
-	makeDefault
-	position={[
-		cameraState.current.position.x,
-		cameraState.current.position.y,
-		cameraState.current.position.z
-	]}
-	rotation={[
-		cameraState.current.rotation.x,
-		cameraState.current.rotation.y,
-		cameraState.current.rotation.z
-	]}
-	fov={70}
->
+<T.PerspectiveCamera makeDefault position={[3.5, 8.5, 8]} fov={70}>
 	<!-- <OrbitControls enableZoom={true} /> -->
 </T.PerspectiveCamera>
-
-{#snippet cameraConfigPage()}
-	<Folder title="Camera" expanded={false}>
-		<Checkbox bind:value={shouldMoveCameraWithMouse} label="Move camera with mouse" />
-		<Point
-			bind:value={() => camera.current.position, (value) => camera.current.position.copy(value)}
-			label="Position"
-			picker="inline"
-		/>
-		<RotationEuler
-			bind:value={() => camera.current.rotation,
-			(value) => camera.current.rotation.set(value.x, value.y, value.z)}
-			expanded={true}
-			label="Rotation"
-			picker={'inline'}
-		/>
-		<Button on:click={resetCameraState} title="Reset" />
-	</Folder>
-{/snippet}

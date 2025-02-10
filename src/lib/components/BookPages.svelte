@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { PUBLIC_PROJECT_NAME } from '$env/static/public';
-	import { crossfade, fade } from 'svelte/transition';
+	import { crossfade } from 'svelte/transition';
 	import Container from './Container.svelte';
 
 	interface ICard {
@@ -71,7 +71,7 @@
 		}
 	}
 
-	const [send, receive] = crossfade({ duration: 2000, fallback: fade });
+	const [send, receive] = crossfade({ duration: 1000 });
 </script>
 
 <Container>

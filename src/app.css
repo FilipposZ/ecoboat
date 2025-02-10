@@ -1,6 +1,9 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui" {
+    themes: halloween --default, fantasy --prefersdark;
+};
+
 
 body {
     width: 100%;
@@ -10,5 +13,5 @@ body {
 }
 
 *, *:hover {
-    scrollbar-color: oklch(var(--s) / 0.5) oklch(var(--sc) / 0.7);
+    scrollbar-color: oklch(var(--color-secondary) / 0.5) oklch(var(--color-secondary-content) / 0.7);
 }
