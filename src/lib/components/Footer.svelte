@@ -1,21 +1,25 @@
 <script>
-	import { Ship } from 'lucide-svelte';
 	import { PUBLIC_PROJECT_NAME } from '$env/static/public';
+	import { Ship } from 'lucide-svelte';
+	import SocialIcons from './SocialIcons.svelte';
 </script>
 
-<footer class="footer p-10 bg-base-200 text-base-content">
+<footer class="footer sm:footer-horizontal relative bg-base-100 text-base-content p-10 mt-15 z-50">
 	<aside>
-		<div class="flex items-center h-fit space-x-2">
-			<Ship class="h-8 w-8" />
-			<div class="text-xl font-bold">{PUBLIC_PROJECT_NAME}</div>
-		</div>
-		<div>Providing reliable tech since 1992</div>
+		<Ship class="h-8 w-8" />
+		<h2>
+			{PUBLIC_PROJECT_NAME}
+		</h2>
+		<p>The eco-friendly boat museum</p>
 	</aside>
-
 	<nav>
-		<h6 class="footer-title">LINKS</h6>
+		<h6 class="footer-title">Find us at</h6>
+		<SocialIcons />
+	</nav>
+	<nav>
+		<h6 class="footer-title">Links</h6>
 		<a class="link link-hover" href="/">Home</a>
-		<a class="link link-hover" href="/">About</a>
+		<a class="link link-hover" href="/#about">About us</a>
 	</nav>
 	<nav>
 		<h6 class="footer-title">Legal</h6>
@@ -23,10 +27,4 @@
 		<a class="link link-hover" href="/privacy-policy">Privacy policy</a>
 		<a class="link link-hover" href="mailto:someone@example.com">Contact</a>
 	</nav>
-	<div>
-		<h2 class="font-bold mb-4 text-base-content text-opacity-60">SOCIALS</h2>
-		<div class="text-opacity-60 text-base-content">
-			you can put some social icons here <br /> or a newsletter signup or whatever
-		</div>
-	</div>
 </footer>

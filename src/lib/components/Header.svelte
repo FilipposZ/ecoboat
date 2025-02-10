@@ -12,7 +12,7 @@
 	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 	const links: Array<Link> = [
-		{ name: 'Experience', href: '/ecoboat' },
+		{ name: 'Experience', href: '/experience' },
 		{ name: 'About', href: '/#about' },
 		{ name: 'Pricing', href: '/#pricing' },
 		{ name: 'FAQ', href: '/#faq' }
@@ -38,11 +38,15 @@
 	});
 </script>
 
-<Container class="main-navbar sticky top-0 bg-base-100 z-50 rounded-b-md">
+<Container class="main-navbar max-w-none sticky top-0 bg-base-100 z-50 rounded-b-md">
 	<header class="navbar px-0">
-		<a class="navbar-start" href="/">
-			<Ship class="w-10 h-10 mr-3" />
-			<Container class="text-2xl sm:text-3xl font-bold">{PUBLIC_PROJECT_NAME}</Container>
+		<a class="navbar-start justify-start" href="/">
+			<enhanced:img
+				class="w-10 h-10 md:mr-3"
+				src="/static/icon-192.png"
+				alt="logo of the ecoboat"
+			/>
+			<span class="text-2xl sm:text-3xl font-bold mx-0 px-0">{PUBLIC_PROJECT_NAME}</span>
 		</a>
 
 		<Container class="navbar-center hidden lg:flex">

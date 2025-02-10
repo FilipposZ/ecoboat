@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 /** @type {import('tailwindcss').Config} */
 const config = {
-	plugins: [require('@tailwindcss/typography'), require('daisyui')],
+	plugins: [],
 	content: ['./src/**/*.{svelte,js,ts,html}'],
 	daisyui: {
 		themes: ["fantasy", "halloween"], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]

@@ -13,6 +13,8 @@
 	let divContainer: HTMLDivElement;
 
 	onMount(() => {
+		const borderRadius = window.innerWidth <= 768 ? '10rem' : '20rem';
+
 		gsap.from(divContainer, {
 			scrollTrigger: {
 				trigger: divContainer,
@@ -20,8 +22,12 @@
 				end: 'top top',
 				scrub: 0.6
 			},
-			...((alignment === 'left' || alignment === 'center') && { borderTopRightRadius: '20rem' }),
-			...((alignment === 'right' || alignment === 'center') && { borderTopLeftRadius: '20rem' }),
+			...((alignment === 'left' || alignment === 'center') && {
+				borderTopRightRadius: borderRadius
+			}),
+			...((alignment === 'right' || alignment === 'center') && {
+				borderTopLeftRadius: borderRadius
+			}),
 			ease: 'power2.in'
 		});
 
@@ -32,9 +38,13 @@
 				end: 'bottom top',
 				scrub: 0.6
 			},
-			...((alignment === 'left' || alignment === 'center') && { borderBottomRightRadius: '20rem' }),
-			...((alignment === 'right' || alignment === 'center') && { borderBottomLeftRadius: '20rem' }),
-			ease: 'power2.in'
+			...((alignment === 'left' || alignment === 'center') && {
+				borderBottomRightRadius: borderRadius
+			}),
+			...((alignment === 'right' || alignment === 'center') && {
+				borderBottomLeftRadius: borderRadius
+			}),
+			ease: 'power2.out'
 		});
 	});
 </script>
@@ -46,7 +56,7 @@
 	class:ml-auto={alignment === 'right' || alignment == 'center'}
 	class:mr-auto={alignment === 'left' || alignment == 'center'}
 >
-	<Container class="prose h-full w-5/6 flex flex-col place-content-center">
+	<Container class="prose h-full w-5/6 flex flex-col place-content-center text-justify">
 		{@render children?.()}
 	</Container>
 </div>

@@ -12,8 +12,6 @@
 	interactivity();
 </script>
 
-<!-- <ConfigPane /> -->
-
 <Camera />
 
 <Timeline />
@@ -23,6 +21,6 @@
 <CubePhysics />
 <CubeInteractive />
 
-<Sailboat name="sailboat" />
+<Sailboat />
 
 <Ocean />
