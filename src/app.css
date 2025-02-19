@@ -15,3 +15,7 @@ body {
 *, *:hover {
     scrollbar-color: oklch(var(--color-secondary) / 0.5) oklch(var(--color-secondary-content) / 0.7);
 }
+
+a {
+    text-decoration: none;
+}
