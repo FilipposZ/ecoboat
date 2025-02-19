@@ -1,13 +1,15 @@
 <script>
-	import About from '$lib/components/About.svelte';
-	import FAQ from '$lib/components/FAQ.svelte';
-	import FeatureCarousel from '$lib/components/FeatureCarousel.svelte';
-	import Hero from '$lib/components/Hero.svelte';
-	import Pricing from '$lib/components/Pricing.svelte';
+	import About from '$features/marketing/components/About.svelte';
+	import FAQ from '$features/marketing/components/FAQ.svelte';
+	import FeatureCarousel from '$features/marketing/components/FeatureCarousel.svelte';
+	import Hero from '$features/marketing/components/Hero.svelte';
+	import Pricing from '$features/marketing/components/Pricing.svelte';
 </script>
 
-<Hero />
-<FeatureCarousel />
-<About />
-<Pricing />
-<FAQ />
+<div class="space-y-16">
+	<Hero />
+	<FeatureCarousel />
+	<About />
+	<Pricing />
+	<FAQ />
+</div>

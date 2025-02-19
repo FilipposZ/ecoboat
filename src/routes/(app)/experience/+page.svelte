@@ -1,14 +1,14 @@
 <script lang="ts">
-	import MainSection from '$lib/components/MainSection.svelte';
+	import MainSection from '$components/MainSection.svelte';
 
-	import Scene from '$lib/world/Scene.svelte';
 	import { Canvas } from '@threlte/core';
 	import { Gizmo, Grid } from '@threlte/extras';
 	import { Debug, World } from '@threlte/rapier';
+	import Scene from '$features/experience/components/Scene.svelte';
 
 	import { dev } from '$app/environment';
-	import WaterDrop from '$lib/components/icons/WaterDrop.svelte';
-	import Preloader from '$lib/components/Preloader.svelte';
+	import WaterDrop from '$features/experience/components/icons/WaterDrop.svelte';
+	import Preloader from '$features/experience/components/Preloader.svelte';
 </script>
 
 <div class="h-screen w-screen fixed top-0 left-0 z-0">

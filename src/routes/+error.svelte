@@ -1,6 +1,6 @@
 <script>
-	import Container from '$lib/components/Container.svelte';
 	import { page } from '$app/stores';
+	import Container from '$components/Container.svelte';
 </script>
 
 <Container>

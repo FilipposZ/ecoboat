@@ -1,13 +1,9 @@
 <script lang="ts">
-	import {
-		PUBLIC_PROJECT_NAME,
-		PUBLIC_DEFAULT_TITLE,
-		PUBLIC_DEFAULT_DESCRIPTION
-	} from '$env/static/public';
+	import { PUBLIC_PROJECT_NAME } from '$env/static/public';
+	import { Laugh, Mail } from 'lucide-svelte';
 	import { tick } from 'svelte';
-	import Google from '$lib/components/icons/Google.svelte';
 	import { superForm } from 'sveltekit-superforms';
-	import { Mail, Laugh } from 'lucide-svelte';
+	import Google from '$components/icons/Google.svelte';
 
 	const { data } = $props();
 

@@ -1,8 +1,8 @@
-import type { Signin } from '$lib/types';
+import type { Signin } from '$features/marketing/lib/types';
 import { eq, or } from 'drizzle-orm';
+import { TimeSpan, createDate } from 'oslo';
 import { db } from './db';
 import { signinTable } from './schema';
-import { TimeSpan, createDate } from 'oslo';
 
 export const getSignins = async (signin: { email: string; ip_address: string }) => {
 	// 0. delete all signins that are older than 1 hour
