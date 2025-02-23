@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { Faq } from '$features/marketing/lib/types';
 	import Container from '$components/Container.svelte';
+	import type { Faq } from '$features/marketing/lib/types';
 
 	const faqs: Array<Faq> = [
 		{

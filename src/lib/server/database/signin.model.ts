@@ -1,4 +1,4 @@
-import type { Signin } from '$features/marketing/lib/types';
+import type { Signin } from '$lib/types';
 import { eq, or } from 'drizzle-orm';
 import { TimeSpan, createDate } from 'oslo';
 import { db } from './db';

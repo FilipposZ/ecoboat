@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Container from '$components/Container.svelte';
 	import { PUBLIC_PROJECT_NAME } from '$env/static/public';
 	import { crossfade } from 'svelte/transition';
 
@@ -74,7 +73,7 @@
 	const [send, receive] = crossfade({ duration: 1000 });
 </script>
 
-<Container>
+<div>
 	<div class="hidden lg:grid grid-cols-2 justify-center min-h-screen">
 		<!-- Flipped cards stack -->
 		<div
@@ -147,4 +146,4 @@
 			{/each}
 		</div>
 	</div>
-</Container>
+</div>
