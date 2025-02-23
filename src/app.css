@@ -3,6 +3,9 @@
 @plugin "daisyui" {
     themes: halloween --default, fantasy --prefersdark;
 };
+@theme {
+    --drop-shadow-text: 0px 0px 0px var(--color-base-content);
+}
 
 
 body {
