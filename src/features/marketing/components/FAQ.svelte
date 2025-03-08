@@ -31,10 +31,10 @@
 </script>
 
 <Container>
-	<div id="faq" class="max-w-2xl mx-auto py-24 sm:py-32">
+	<div id="faq" class="max-w-2xl mx-auto">
 		<div class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl text-center">FAQ</div>
 		<div class="mt-2 sm:mt-4 text-md sm:text-lg leading-6 sm:leading-8 text-center">
-			Still have questions? We've got you covered!
+			<p>Still have questions? We've got you covered!</p>
 		</div>
 		<div class="mt-5 md:mt-8 lg:mt-10">
 			<div class="join join-vertical w-full">
