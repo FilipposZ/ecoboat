@@ -2,9 +2,10 @@
 	import Container from '$components/Container.svelte';
 	import Logo from '$components/icons/Logo.svelte';
 	import { theme } from '$components/icons/ThemeSelector.svelte';
+	import BluredWindow from './BluredWindow.svelte';
 </script>
 
-<div class="h-[80vh] relative">
+<div class="h-[80vh] relative flex items-center justify-center">
 	<video
 		class="absolute h-full w-screen object-cover -z-10 {theme.isDarkMode
 			? 'brightness-30'
@@ -14,12 +15,9 @@
 		loop
 		muted
 	></video>
-	<Container class="pt-25 flex flex-col prose items-center justify-center box-content">
-		<div class="p-14 rounded-2xl bg-base-100/10 backdrop-blur-xs">
-			<h1 class="text-4xl text-center drop-shadow-text">
-				A self-sustainable boat <br />
-				A breathing ecomuseum
-			</h1>
+	<Container class="prose">
+		<BluredWindow>
+			<h1 class="text-center drop-shadow-text">A self-sustainable boat ecomuseum</h1>
 			<ul class="text-lg text-center drop-shadow-text list-outside">
 				<li>Find meaning in your travels</li>
 				<li>Learn about our society and nature</li>
@@ -32,6 +30,6 @@
 					<Logo class="mr-2" /> Embark on the journey !
 				</button>
 			</div>
-		</div>
+		</BluredWindow>
 	</Container>
 </div>
