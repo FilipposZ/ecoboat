@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Container from '$components/Container.svelte';
 	import { PUBLIC_PROJECT_NAME } from '$env/static/public';
 	import { crossfade } from 'svelte/transition';
 
@@ -74,7 +73,7 @@
 	const [send, receive] = crossfade({ duration: 1000 });
 </script>
 
-<Container>
+<div>
 	<div class="hidden lg:grid grid-cols-2 justify-center min-h-screen">
 		<!-- Flipped cards stack -->
 		<div
@@ -85,7 +84,7 @@
 				{@const leftCard = currentLeftCard}
 				{#key currentLeftCard}
 					<div
-						class="card absolute w-4/6 h-5/6 origin-right hover:shadow-xl active:scale-95"
+						class="card absolute w-3/6 h-5/6 origin-right hover:shadow-xl active:scale-95"
 						role="button"
 						tabindex="0"
 						onclick={() => flipCard(leftCard)}
@@ -93,7 +92,7 @@
 						in:receive={{ key: leftCard.id }}
 						out:send={{ key: leftCard.id }}
 					>
-						<div class="card-body">
+						<div class="card-body text-justify">
 							<h3 class="mb-3 text-black font-bold">{leftCard.backTitle}</h3>
 							<p class="text-black">{leftCard.backContent}</p>
 						</div>
@@ -111,7 +110,7 @@
 				{@const rightCard = currentRightCard}
 				{#key currentRightCard}
 					<div
-						class="card absolute w-4/6 h-5/6 ml-5 origin-left hover:shadow-xl active:scale-95"
+						class="card absolute w-3/6 h-5/6 ml-5 origin-left hover:shadow-xl active:scale-95"
 						role="button"
 						tabindex="0"
 						onclick={() => flipCard(rightCard)}
@@ -119,7 +118,7 @@
 						in:receive={{ key: rightCard.id }}
 						out:send={{ key: rightCard.id }}
 					>
-						<div class="card-body flex items-center">
+						<div class="card-body flex items-center text-justify">
 							<h3 class="mb-3 text-black font-bold">{rightCard.title}</h3>
 							<p class="text-black">{rightCard.content}</p>
 						</div>
@@ -147,4 +146,4 @@
 			{/each}
 		</div>
 	</div>
-</Container>
+</div>

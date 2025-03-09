@@ -3,6 +3,6 @@
 	import BookPages from './BookPages.svelte';
 </script>
 
-<Container>
+<Container id="about">
 	<BookPages />
 </Container>

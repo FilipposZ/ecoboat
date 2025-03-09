@@ -2,20 +2,22 @@
 	import { browser, dev } from '$app/environment';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import { page } from '$app/state';
-	import { PUBLIC_DEFAULT_DESCRIPTION, PUBLIC_DEFAULT_TITLE } from '$env/static/public';
 	import Footer from '$components/Footer.svelte';
 	import Header from '$components/Header.svelte';
+	import { PUBLIC_DEFAULT_DESCRIPTION, PUBLIC_DEFAULT_TITLE } from '$env/static/public';
 
 	import { getMeta } from '$lib/meta';
 	import posthog from 'posthog-js';
 	import '../app.css';
 
+	import { setEnabledFeatures } from '$lib/configuration/feature-flags.svelte';
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 	gsap.registerPlugin(ScrollTrigger);
 
-	let { children } = $props();
+	let { children, data } = $props();
+	setEnabledFeatures(data.enabledFeatures);
 
 	if (browser && !dev) {
 		beforeNavigate(() => posthog.capture('$pageleave'));

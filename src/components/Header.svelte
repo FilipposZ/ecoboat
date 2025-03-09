@@ -1,22 +1,28 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { page } from '$app/state';
+	import Container from '$components/Container.svelte';
+	import ThemeSelector from '$components/icons/ThemeSelector.svelte';
 	import type { Link } from '$lib/types';
 	import { LogOut, Menu, Ship } from 'lucide-svelte';
 	import { onMount } from 'svelte';
-	import Container from '$components/Container.svelte';
-	import ThemeSelector from '$components/icons/ThemeSelector.svelte';
 
+	import Logo from '$components/icons/Logo.svelte';
 	import { PUBLIC_PROJECT_NAME } from '$env/static/public';
+	import { FeatureFlag, getEnabledFeatures } from '$lib/configuration/feature-flags.svelte';
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-	import Logo from '$components/icons/Logo.svelte';
+
+	const features = getEnabledFeatures();
 
 	const links: Array<Link> = [
-		{ name: 'Experience', href: '/experience' },
-		{ name: 'About', href: '/#about' },
-		{ name: 'Pricing', href: '/#pricing' },
-		{ name: 'FAQ', href: '/#faq' }
+        { name: 'Features', href: '/#features' },
+        { name: 'About', href: '/#about' },
+		...(features.isEnabled(FeatureFlag.PricingComponent)
+			? [{ name: 'Pricing', href: '/#pricing' }]
+			: []),
+        { name: 'FAQ', href: '/#faq' },
+        { name: 'Experience', href: '/experience' },
 	];
 
 	// Show/hide navbar on scroll
@@ -50,7 +56,7 @@
 			<ul class="menu menu-horizontal px-1">
 				{#each links as link}
 					<li>
-						<a href={link.href}>{link.name}</a>
+						<a href={link.href} data-sveltekit-prefetch>{link.name}</a>
 					</li>
 				{/each}
 			</ul>
