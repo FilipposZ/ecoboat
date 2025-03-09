@@ -9,14 +9,20 @@
 
 	import Logo from '$components/icons/Logo.svelte';
 	import { PUBLIC_PROJECT_NAME } from '$env/static/public';
+	import { FeatureFlag, getEnabledFeatures } from '$lib/configuration/feature-flags.svelte';
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
+	const features = getEnabledFeatures();
+
 	const links: Array<Link> = [
-		{ name: 'Experience', href: '/experience' },
-		{ name: 'About', href: '/#about' },
-		{ name: 'Pricing', href: '/#pricing' },
-		{ name: 'FAQ', href: '/#faq' }
+        { name: 'Features', href: '/#features' },
+        { name: 'About', href: '/#about' },
+		...(features.isEnabled(FeatureFlag.PricingComponent)
+			? [{ name: 'Pricing', href: '/#pricing' }]
+			: []),
+        { name: 'FAQ', href: '/#faq' },
+        { name: 'Experience', href: '/experience' },
 	];
 
 	// Show/hide navbar on scroll

@@ -30,26 +30,24 @@
 	];
 </script>
 
-<Container>
-	<div id="faq" class="max-w-2xl mx-auto">
-		<div class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl text-center">FAQ</div>
-		<div class="mt-2 sm:mt-4 text-md sm:text-lg leading-6 sm:leading-8 text-center">
-			<p>Still have questions? We've got you covered!</p>
-		</div>
-		<div class="mt-5 md:mt-8 lg:mt-10">
-			<div class="join join-vertical w-full">
-				{#each faqs as faq}
-					<div class="collapse collapse-arrow join-item border">
-						<input type="radio" name="accordion" />
-						<div class="collapse-title text-xl font-medium">
-							{faq.question}
-						</div>
-						<div class="collapse-content">
-							<p>{@html faq.answer}</p>
-						</div>
-					</div>
-				{/each}
-			</div>
-		</div>
-	</div>
+<Container id="faq" class="max-w-2xl mx-auto">
+    <div class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl text-center">FAQ</div>
+    <div class="mt-2 sm:mt-4 text-md sm:text-lg leading-6 sm:leading-8 text-center">
+        <p>Still have questions? We've got you covered!</p>
+    </div>
+    <div class="mt-5 md:mt-8 lg:mt-10">
+        <div class="join join-vertical w-full">
+            {#each faqs as faq}
+                <div class="collapse collapse-arrow join-item border">
+                    <input type="radio" name="accordion" />
+                    <div class="collapse-title text-xl font-medium">
+                        {faq.question}
+                    </div>
+                    <div class="collapse-content">
+                        <p>{@html faq.answer}</p>
+                    </div>
+                </div>
+            {/each}
+        </div>
+    </div>
 </Container>

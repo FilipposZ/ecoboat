@@ -16,6 +16,9 @@ const config = {
         alias: {
             '$components': path.resolve('./src/components'),
             '$features': path.resolve('./src/features'),
+        },
+        paths: {
+            relative: false,
         }
 	}
 };

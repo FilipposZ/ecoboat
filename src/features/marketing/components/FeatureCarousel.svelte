@@ -53,7 +53,7 @@
 	</div>
 {/snippet}
 
-<Container class="h-screen">
+<Container id="features" class="h-screen">
 	<h2 class="font-bold text-2xl md:text-4xl mb-16 text-center">Explore the Ecoboat experience</h2>
 
 	<div class="carousel carousel-center space-x-2 px-4 py-2 h-5/6" bind:this={carouselRef}>
