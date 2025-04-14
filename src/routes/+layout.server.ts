@@ -1,29 +1,25 @@
+import { PERSONAL_POSTHOG_KEY } from '$env/static/private';
 import { PUBLIC_POSTHOG_HOST, PUBLIC_POSTHOG_KEY } from '$env/static/public';
 import { FeatureFlag } from '$lib/configuration/feature-flags.svelte';
-import { parse } from 'cookie';
 import { PostHog } from 'posthog-node';
 import { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = async (request) => {
-    const posthog = new PostHog(PUBLIC_POSTHOG_KEY, { host: PUBLIC_POSTHOG_HOST });
+
+export const load: LayoutServerLoad = async ({ locals }) => {
+    const posthog = new PostHog(PUBLIC_POSTHOG_KEY, { host: PUBLIC_POSTHOG_HOST, personalApiKey: PERSONAL_POSTHOG_KEY });
     
-    const cookies = parse(request.request.headers.get('cookie') || '');
-    const cookieKey = `ph_${PUBLIC_POSTHOG_KEY}_posthog`;
-  
     const enabledFeatures: FeatureFlag[] = [];
-    if (cookies[cookieKey]) {
-        try {
-            const distinctId = JSON.parse(cookies[cookieKey]).distinct_id;
+
+    const posthogId = locals.posthogId || '';
+    try {
             for (const featureFlag of Object.values(FeatureFlag)) {
-                if (await posthog.getFeatureFlag(featureFlag, distinctId)) {
+                if (await posthog.getFeatureFlag(featureFlag, posthogId)) {
                     enabledFeatures.push(featureFlag);
                 }
-            }
+           }
         } catch (e) {
             console.error(e);
         }
-
-    }
     
-	return { user: request.locals.user, enabledFeatures };
+	return { user: locals.user, enabledFeatures };
 };

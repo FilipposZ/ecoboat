@@ -17,13 +17,12 @@
 	></video>
 	<Container class="prose">
 		<BluredWindow>
-			<h1 class="text-center drop-shadow-text">A self-sustainable boat ecomuseum</h1>
+			<h1 class="text-center drop-shadow-text">Reconnect with nature</h1>
 			<ul class="text-lg text-center drop-shadow-text list-outside">
 				<li>Find meaning in your travels</li>
 				<li>Learn about our society and nature</li>
 				<li>Explore the impact of our actions</li>
 				<li>Immerse yourself in interactive workshops</li>
-				<li>Reconnect deeply with nature</li>
 			</ul>
 			<div class="flex items-center justify-center mt-10">
 				<button class="btn btn-wide btn-primary text-lg w-full max-w-sm h-14">
