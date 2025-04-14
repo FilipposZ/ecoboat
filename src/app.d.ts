@@ -6,11 +6,14 @@ declare global {
 		interface Locals {
 			user: import('lucia').User | null;
 			session: import('lucia').Session | null;
+            posthogId: string | null;
 		}
-		// interface PageData {}
+
+        // interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
 	}
 }
 
-export {};
+export { };
+

@@ -1,7 +1,10 @@
+import { PUBLIC_POSTHOG_KEY } from '$env/static/public';
 import { lucia } from '$lib/server/auth';
-import type { Handle } from '@sveltejs/kit';
+import type { Cookies, Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
+    setPosthogId(event);
+
 	const sessionId = event.cookies.get(lucia.sessionCookieName);
 	if (!sessionId) {
 		event.locals.user = null;
@@ -26,7 +29,17 @@ export const handle: Handle = async ({ event, resolve }) => {
 			...sessionCookie.attributes
 		});
 	}
-	event.locals.user = user;
-	event.locals.session = session;
+
+    event.locals.user = user;
+    event.locals.session = session;
+
 	return resolve(event);
 };
+
+function setPosthogId({ locals, cookies }: {locals: App.Locals, cookies: Cookies}) {
+    const phCookieString = cookies.get(`ph_${PUBLIC_POSTHOG_KEY}_posthog`);
+    const phCookie = phCookieString ? JSON.parse(phCookieString) : null;
+    const posthogId = phCookie ? phCookie.distinct_id : null;
+    
+    locals.posthogId = posthogId;
+}
